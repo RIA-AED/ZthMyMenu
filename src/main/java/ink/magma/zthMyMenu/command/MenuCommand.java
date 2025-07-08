@@ -21,9 +21,16 @@ public class MenuCommand implements CommandExecutor {
         }
 
         // Page 1
+        final Component balanceComponent;
+        if (ZthMyMenu.econ != null) {
+            balanceComponent = Component.text("你的余额: " + ZthMyMenu.econ.format(ZthMyMenu.econ.getBalance(player)) + "\n\n", NamedTextColor.GOLD);
+        } else {
+            balanceComponent = Component.text("经济系统未链接\n\n", NamedTextColor.GRAY);
+        }
+
         Component page1 = Component.text()
                 .append(Component.text("玩家快捷指令\n", NamedTextColor.RED, TextDecoration.BOLD))
-                .append(Component.text("你的余额: " + ZthMyMenu.econ.format(ZthMyMenu.econ.getBalance(player)) + "\n\n", NamedTextColor.GOLD))
+                .append(balanceComponent)
                 .append(createButton("/spawn", "主城"))
                 .append(Component.text(" "))
                 .append(createButton("/back", "返回"))

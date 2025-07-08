@@ -11,9 +11,7 @@ public final class ZthMyMenu extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         if (!setupEconomy()) {
-            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
-            getServer().getPluginManager().disablePlugin(this);
-            return;
+            getLogger().warning("Vault not found! Economy features will be disabled.");
         }
 
         getCommand("mymenu").setExecutor(new ink.magma.zthMyMenu.command.MenuCommand());
