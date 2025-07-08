@@ -4,6 +4,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import ink.magma.zthMyMenu.command.CommandManager;
+import ink.magma.zthMyMenu.listener.PlayerListener;
 import ink.magma.zthMyMenu.menu.MenuManager;
 import ink.magma.zthMyMenu.menu.impl.QuickMenu;
 import net.milkbowl.vault.economy.Economy;
@@ -23,6 +24,9 @@ public final class ZthMyMenu extends JavaPlugin {
 
         // 注册所有命令
         CommandManager.register(this);
+
+        // 注册事件监听器
+        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
     }
 
     private void registerMenus() {
