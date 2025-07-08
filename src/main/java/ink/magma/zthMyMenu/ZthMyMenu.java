@@ -1,10 +1,12 @@
 package ink.magma.zthMyMenu;
 
+import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import ink.magma.zthMyMenu.command.CommandManager;
 import ink.magma.zthMyMenu.menu.MenuManager;
 import ink.magma.zthMyMenu.menu.impl.QuickMenu;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ZthMyMenu extends JavaPlugin {
     public static Economy econ = null;
@@ -19,7 +21,8 @@ public final class ZthMyMenu extends JavaPlugin {
         // 注册所有菜单
         registerMenus();
 
-        getCommand("mymenu").setExecutor(new ink.magma.zthMyMenu.command.MenuCommand());
+        // 注册所有命令
+        CommandManager.register(this);
     }
 
     private void registerMenus() {
