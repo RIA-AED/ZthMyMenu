@@ -23,13 +23,14 @@ public class MenuCommand implements CommandExecutor {
         // Page 1
         final Component balanceComponent;
         if (ZthMyMenu.econ != null) {
-            balanceComponent = Component.text("你的余额: " + ZthMyMenu.econ.format(ZthMyMenu.econ.getBalance(player)) + "\n\n", NamedTextColor.GOLD);
+            balanceComponent = Component.text("你的余额: ", NamedTextColor.BLACK)
+                    .append(Component.text(ZthMyMenu.econ.format(ZthMyMenu.econ.getBalance(player)) + "\n\n", NamedTextColor.DARK_GREEN));
         } else {
-            balanceComponent = Component.text("经济系统未链接\n\n", NamedTextColor.GRAY);
+            balanceComponent = Component.text("经济系统未链接\n\n", NamedTextColor.DARK_GRAY);
         }
 
         Component page1 = Component.text()
-                .append(Component.text("玩家快捷指令\n", NamedTextColor.RED, TextDecoration.BOLD))
+                .append(Component.text("玩家快捷指令\n", NamedTextColor.DARK_RED, TextDecoration.BOLD))
                 .append(balanceComponent)
                 .append(createButton("/spawn", "主城"))
                 .append(Component.text(" "))
@@ -48,7 +49,7 @@ public class MenuCommand implements CommandExecutor {
 
         // Page 2
         Component page2 = Component.text()
-                .append(Component.text("功能开关\n\n", NamedTextColor.RED, TextDecoration.BOLD))
+                .append(Component.text("功能开关\n\n", NamedTextColor.DARK_RED, TextDecoration.BOLD))
                 .append(createButton("/fastlogin", "正版登录"))
                 .append(Component.text(" "))
                 .append(createButton("/cracked", "离线登录"))
@@ -74,12 +75,12 @@ public class MenuCommand implements CommandExecutor {
     }
 
     private Component createButton(String command, String text) {
-        return Component.text("[" + text + "]", NamedTextColor.AQUA, TextDecoration.UNDERLINED)
+        return Component.text("[" + text + "]", NamedTextColor.DARK_AQUA)
                 .clickEvent(ClickEvent.runCommand(command));
     }
 
     private Component createLink(String url, String text) {
-        return Component.text("[" + text + "]", NamedTextColor.GREEN, TextDecoration.UNDERLINED)
+        return Component.text("[" + text + "]", NamedTextColor.DARK_GREEN)
                 .clickEvent(ClickEvent.openUrl(url));
     }
 }
