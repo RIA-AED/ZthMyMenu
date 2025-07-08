@@ -3,8 +3,3 @@ version: '1.0-SNAPSHOT'
 main: ink.magma.zthMyMenu.ZthMyMenu
 api-version: '1.21'
 authors: [ Magma ]
-softdepend: [Vault]
-commands:
-  mymenu:
-    description: "Opens the main menu."
-    usage: "/mymenu"
