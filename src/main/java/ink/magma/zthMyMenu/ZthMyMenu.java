@@ -6,6 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ink.magma.zthMyMenu.command.CommandManager;
 import ink.magma.zthMyMenu.listener.PlayerListener;
 import ink.magma.zthMyMenu.menu.MenuManager;
+import ink.magma.zthMyMenu.menu.impl.AccessibilityMenu;
+import ink.magma.zthMyMenu.menu.impl.MySpawnMenu;
 import ink.magma.zthMyMenu.menu.impl.QuickMenu;
 import net.milkbowl.vault.economy.Economy;
 
@@ -31,6 +33,8 @@ public final class ZthMyMenu extends JavaPlugin {
 
     private void registerMenus() {
         MenuManager.registerMenu(new QuickMenu());
+        MenuManager.registerMenu(new AccessibilityMenu());
+        MenuManager.registerMenu(new MySpawnMenu());
         // 未来可以在这里注册更多菜单
     }
 

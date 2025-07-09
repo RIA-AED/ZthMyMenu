@@ -44,10 +44,14 @@ public class PlayerListener implements Listener {
             if ((currentTime - sneakTime) <= SNEAK_TIMEOUT) {
                 // 时间在2秒内，判定为快捷操作
                 event.setCancelled(true); // 取消默认的物品交换行为
-                MenuManager.openMenu(player, "quick_menu"); // 打开快捷菜单
+                MenuManager.openMenu(player, "quick_menu", null); // 打开快捷菜单
                 sneakTimestamps.remove(playerUUID); // 重置状态
             }
             // 如果超过2秒，不做任何事，允许正常的物品交换
+            else {
+                // 超时了, 移除该次潜行记录
+                sneakTimestamps.remove(playerUUID);
+            }
         }
     }
 

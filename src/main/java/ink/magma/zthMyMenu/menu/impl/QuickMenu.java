@@ -9,6 +9,8 @@ import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nullable;
+
 public class QuickMenu implements Menu {
     @Override
     public String getId() {
@@ -16,7 +18,12 @@ public class QuickMenu implements Menu {
     }
 
     @Override
-    public Book getBook(Player player) {
+    public String getName() {
+        return "快捷菜单";
+    }
+
+    @Override
+    public Book getBook(Player player, @Nullable Menu fromMenu) {
         // Page 1
         final Component balanceComponent;
         if (ZthMyMenu.econ != null) {
@@ -39,6 +46,14 @@ public class QuickMenu implements Menu {
         Component toggleLastServerName = Component.text("自动返回上次退出时的服务器", NamedTextColor.DARK_AQUA);
         Component sitName = Component.text("当场坐下", NamedTextColor.DARK_AQUA);
         Component signInName = Component.text("每日共鸣", NamedTextColor.DARK_AQUA);
+        Component viaVerName = Component.text("你升级了嘛?", NamedTextColor.DARK_AQUA);
+        Component colorName = Component.text("调色板", NamedTextColor.DARK_AQUA);
+        Component story1Name = Component.text("故事箱 · 漂流瓶", NamedTextColor.DARK_AQUA);
+        Component story2Name = Component.text("故事箱 · 漂流瓶", NamedTextColor.DARK_AQUA);
+        Component accessibilityName = Component.text("辅助功能", NamedTextColor.DARK_AQUA);
+        Component mySpawnName = Component.text("我的主城", NamedTextColor.DARK_AQUA);
+        Component enderChestName = Component.text("菜鱼驿站", NamedTextColor.DARK_AQUA);
+        Component hamburgerName = Component.text("好味堡", NamedTextColor.DARK_AQUA);
 
         // --- Lores ---
         Component spawnLore = Component.text("指引你返回偏好的主城.\n\n", NamedTextColor.GRAY)
@@ -56,10 +71,27 @@ public class QuickMenu implements Menu {
         Component toggleLastServerLore = Component.text("默认情况下, 登录后将自动返回\n上次退出的世界.", NamedTextColor.GRAY);
         Component sitLore = Component.text("直接坐在你现在的位置.", NamedTextColor.GRAY);
         Component signInLore = Component.text("祝您拥有美好的一天.", NamedTextColor.GRAY);
+        Component viaVerLore = Component.text("看看大家都在使用什么版本进行游戏!", NamedTextColor.GRAY);
+        Component colorLore = Component.text("点击将调色板显示到聊天栏", NamedTextColor.GRAY);
+        Component story1Lore = Component.text("点击查看使用教程", NamedTextColor.GRAY);
+        Component story2Lore = Component.text("点击随机看一本书", NamedTextColor.GRAY);
+        Component accessibilityLore = Component.text("一些让 Zth 更好用的选项.", NamedTextColor.GRAY);
+        Component mySpawnLore = Component.text("设置您的主城传送点.", NamedTextColor.GRAY);
+        Component enderChestLore = Component.text("您的跨世界存储驿站.\n每次打开消耗 〇1.", NamedTextColor.GRAY);
+        Component hamburgerLore = Component.text("云吃堡.", NamedTextColor.GRAY);
 
         // --- Page 1 ---
+        Component title = Component.text("玩家快捷指令\n", NamedTextColor.DARK_RED, TextDecoration.BOLD);
+        if (fromMenu != null) {
+            title = Component.text()
+                    .append(createBackButton(fromMenu))
+                    .append(Component.text(" "))
+                    .append(title)
+                    .build();
+        }
+
         Component page1 = Component.text()
-                .append(Component.text("玩家快捷指令\n", NamedTextColor.DARK_RED, TextDecoration.BOLD))
+                .append(title)
                 .append(balanceComponent)
                 .append(createButton("/spawn", spawnName, spawnLore))
                 .append(Component.text(" "))
@@ -74,6 +106,10 @@ public class QuickMenu implements Menu {
                 .append(createLink("https://wiki.ria.red", wikiName, wikiLore))
                 .append(Component.text(" "))
                 .append(createLink("https://satellite.ria.red/", satelliteName, satelliteLore))
+                .append(Component.text("\n\n"))
+                .append(createButton("/opbp", enderChestName, enderChestLore))
+                .append(Component.text(" "))
+                .append(createButton("/heal", hamburgerName, hamburgerLore))
                 .build();
 
         // --- Page 2 ---
@@ -90,12 +126,29 @@ public class QuickMenu implements Menu {
                 .append(createButton("/litesignin gui", signInName, signInLore))
                 .build();
 
+        // --- Page 3 ---
+        Component page3 = Component.text()
+                .append(Component.text("其他功能\n\n", NamedTextColor.DARK_RED, TextDecoration.BOLD))
+                .append(createButton("/viaversion list", viaVerName, viaVerLore))
+                .append(Component.text("\n\n"))
+                .append(createButton("/zthmenu colors", colorName, colorLore))
+                .append(Component.text("\n\n"))
+                .append(createButton("/openspecificstorybook 1", story1Name, story1Lore))
+                .append(Component.text(" "))
+                .append(createButton("/randomstorybook", story2Name, story2Lore))
+                .append(Component.text("\n\n"))
+                .append(createMenuButton("accessibility", accessibilityName, accessibilityLore))
+                .append(Component.text(" "))
+                .append(createMenuButton("my_spawn", mySpawnName, mySpawnLore))
+                .build();
+
 
         return Book.book(
                 Component.text("快捷菜单"),
                 Component.text("服务器"),
                 page1,
-                page2
+                page2,
+                page3
         );
     }
 
@@ -116,6 +169,30 @@ public class QuickMenu implements Menu {
                 .append(Component.text("]", NamedTextColor.DARK_GREEN))
                 .clickEvent(ClickEvent.openUrl(url))
                 .hoverEvent(hoverText.asHoverEvent())
+                .build();
+    }
+
+    private Component createMenuButton(String menuId, Component text, Component hoverText) {
+        String command = "/zmenu open " + menuId + " " + this.getId();
+
+        return Component.text()
+                .append(Component.text("[", NamedTextColor.DARK_GREEN))
+                .append(text)
+                .append(Component.text("]", NamedTextColor.DARK_GREEN))
+                .clickEvent(ClickEvent.runCommand(command))
+                .hoverEvent(hoverText.asHoverEvent())
+                .build();
+    }
+
+    private Component createBackButton(Menu fromMenu) {
+        String command = "/zmenu open " + fromMenu.getId();
+
+        return Component.text()
+                .append(Component.text("[", NamedTextColor.RED))
+                .append(Component.text("返回", NamedTextColor.WHITE))
+                .append(Component.text("]", NamedTextColor.RED))
+                .clickEvent(ClickEvent.runCommand(command))
+                .hoverEvent(Component.text("返回 " + fromMenu.getName()).asHoverEvent())
                 .build();
     }
 }
