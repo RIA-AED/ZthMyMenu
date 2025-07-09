@@ -2,6 +2,7 @@ package ink.magma.zthMyMenu.menu.impl;
 
 import ink.magma.zthMyMenu.ZthMyMenu;
 import ink.magma.zthMyMenu.menu.Menu;
+import ink.magma.zthMyMenu.menu.MenuHelper;
 import net.kyori.adventure.inventory.Book;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -84,7 +85,7 @@ public class QuickMenu implements Menu {
         Component title = Component.text("玩家快捷指令\n", NamedTextColor.DARK_RED, TextDecoration.BOLD);
         if (fromMenu != null) {
             title = Component.text()
-                    .append(createBackButton(fromMenu))
+                    .append(MenuHelper.createBackButton(fromMenu))
                     .append(Component.text(" "))
                     .append(title)
                     .build();
@@ -184,15 +185,4 @@ public class QuickMenu implements Menu {
                 .build();
     }
 
-    private Component createBackButton(Menu fromMenu) {
-        String command = "/zmenu open " + fromMenu.getId();
-
-        return Component.text()
-                .append(Component.text("[", NamedTextColor.RED))
-                .append(Component.text("返回", NamedTextColor.WHITE))
-                .append(Component.text("]", NamedTextColor.RED))
-                .clickEvent(ClickEvent.runCommand(command))
-                .hoverEvent(Component.text("返回 " + fromMenu.getName()).asHoverEvent())
-                .build();
-    }
 }
