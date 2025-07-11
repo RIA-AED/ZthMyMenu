@@ -31,7 +31,7 @@ public class QuickMenu implements Menu {
             balanceComponent = Component.text("你的余额: ", NamedTextColor.BLACK)
                     .append(Component.text(ZthMyMenu.econ.format(ZthMyMenu.econ.getBalance(player)) + "\n\n", NamedTextColor.DARK_GREEN));
         } else {
-            balanceComponent = Component.text("经济系统未链接\n\n", NamedTextColor.DARK_GRAY);
+            balanceComponent = Component.empty();
         }
 
         // --- Names ---
@@ -132,7 +132,7 @@ public class QuickMenu implements Menu {
                 .append(Component.text("其他功能\n\n", NamedTextColor.DARK_RED, TextDecoration.BOLD))
                 .append(createButton("/viaversion list", viaVerName, viaVerLore))
                 .append(Component.text("\n\n"))
-                .append(createButton("/zthmenu colors", colorName, colorLore))
+                .append(createButton("/zthmymenu:zmenu colors", colorName, colorLore))
                 .append(Component.text("\n\n"))
                 .append(createButton("/openspecificstorybook 1", story1Name, story1Lore))
                 .append(Component.text(" "))
