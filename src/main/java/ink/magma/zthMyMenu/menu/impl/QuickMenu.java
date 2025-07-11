@@ -99,12 +99,6 @@ public class QuickMenu implements Menu {
                         "<dark_aqua>[菜鱼驿站]</dark_aqua>",
                         "<gray>您的跨世界存储驿站.\n每次打开消耗 〇1.</gray>"
                 ))
-                .append(Component.text(" "))
-                .append(createButton(
-                        "/heal",
-                        "<dark_aqua>[好味堡]</dark_aqua>",
-                        "<gray>云吃堡.</gray>"
-                ))
                 .build();
 
         // --- Page 2 ---
