@@ -95,7 +95,7 @@ public class QuickMenu implements Menu {
                 .appendNewline()
                 .appendNewline()
                 .append(createButton(
-                        "/opbp",
+                        "/zth-poststations confirm",
                         "<dark_aqua>[菜鱼驿站]</dark_aqua>",
                         "<gray>您的跨世界存储驿站.\n每次打开消耗 〇1.</gray>"
                 ))
