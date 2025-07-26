@@ -70,13 +70,13 @@ public class QuickMenu implements Menu {
                 .appendNewline()
                 .append(createButton(
                         "/co near",
-                        "<dark_aqua>[查询周围历史]</dark_aqua>",
+                        "<dark_aqua>[查询周围]</dark_aqua>",
                         "<gray>使用椰能快速查询你周围\n的变化痕迹.</gray>"
                 ))
                 .append(Component.text(" "))
                 .append(createButton(
                         "/co i",
-                        "<dark_aqua>[切换查询模式]</dark_aqua>",
+                        "<dark_aqua>[查询模式]</dark_aqua>",
                         "<gray>发动椰术\n发动后将能看到所触摸过的方块\n曾经被人操作过的痕迹.</gray>"
                 ))
                 .appendNewline()
@@ -97,7 +97,13 @@ public class QuickMenu implements Menu {
                 .append(createButton(
                         "/zth-poststations confirm",
                         "<dark_aqua>[菜鱼驿站]</dark_aqua>",
-                        "<gray>您的跨世界存储驿站.\n每次打开消耗 〇1.</gray>"
+                        "<gray>用于在零洲/奈落洲与后土之间传递物品的存储驿站.\n每次打开消耗 〇1.</gray>"
+                ))
+                .append(Component.text(" "))
+                .append(createButton(
+                        "/litesignin gui",
+                        "<dark_aqua>[每日共鸣]</dark_aqua>",
+                        "<gray>祝您拥有美好的一天.</gray>"
                 ))
                 .build();
 
@@ -128,13 +134,6 @@ public class QuickMenu implements Menu {
                         "/sit",
                         "<dark_aqua>[当场坐下]</dark_aqua>",
                         "<gray>直接坐在你现在的位置.</gray>"
-                ))
-                .appendNewline()
-                .appendNewline()
-                .append(createButton(
-                        "/litesignin gui",
-                        "<dark_aqua>[每日共鸣]</dark_aqua>",
-                        "<gray>祝您拥有美好的一天.</gray>"
                 ))
                 .build();
 
