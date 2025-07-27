@@ -1,5 +1,5 @@
 name: ZthMyMenu
-version: '1.0.1'
+version: '1.0.2'
 main: ink.magma.zthMyMenu.ZthMyMenu
 api-version: '1.21'
 authors: [ Magma ]

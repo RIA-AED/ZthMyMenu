@@ -22,7 +22,6 @@ public class CommandManager {
 
             commands.register(
                     Commands.literal("zmenu")
-                            .requires(source -> source.getSender().hasPermission("zth.mymenu.admin"))
                             .then(Commands.literal("list").executes(context -> {
                                 handleList(context.getSource().getSender());
                                 return 1;
@@ -51,7 +50,8 @@ public class CommandManager {
                                                     .executes(context -> {
                                                         if (context.getSource().getSender() instanceof Player player) {
                                                             String menuId = context.getArgument("menu_id", String.class);
-                                                            String fromMenuId = context.getArgument("from_menu_id", String.class);
+                                                            String fromMenuId = context.getArgument("from_menu_id",
+                                                                    String.class);
                                                             MenuManager.openMenu(player, menuId, fromMenuId);
                                                         } else {
                                                             context.getSource().getSender()
@@ -65,6 +65,13 @@ public class CommandManager {
                                 }
                                 return 1;
                             }))
+                            .then(Commands.literal("reload")
+                                    .requires(source -> source.getSender().hasPermission("zth.mymenu.command.reload"))
+                                    .executes(context -> {
+                                        // TODO: Config Reload
+                                        context.getSource().getSender().sendMessage("Not Implemented.");
+                                        return 1;
+                                    }))
                             .build());
 
             commands.register(
@@ -88,11 +95,17 @@ public class CommandManager {
     }
 
     private static void handleColors(Player player) {
-        player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&7-----====== &l调色板 &7======-----"));
-        player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&11 深蓝 &22 深绿 &33 深青 &44 深红 &55 深紫"));
-        player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&66 金色 &77 灰色 &88 深灰 &99 蓝 &00 黑色"));
-        player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&aa 绿色 &bb 青色 &cc 红色 &dd 亮紫 &ee 黄色 &ff 白色"));
-        player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&f&ll 加粗 &r&f&mm 删除线&r &r&f&nn 下划线&r &r&f&oo 斜体 &r&f&fr 重置"));
-        player.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&7-----====== &l调色板 &7======-----"));
+        player.sendMessage(
+                LegacyComponentSerializer.legacyAmpersand().deserialize("&7-----====== &l调色板 &7======-----"));
+        player.sendMessage(
+                LegacyComponentSerializer.legacyAmpersand().deserialize("&11 深蓝 &22 深绿 &33 深青 &44 深红 &55 深紫"));
+        player.sendMessage(
+                LegacyComponentSerializer.legacyAmpersand().deserialize("&66 金色 &77 灰色 &88 深灰 &99 蓝 &00 黑色"));
+        player.sendMessage(
+                LegacyComponentSerializer.legacyAmpersand().deserialize("&aa 绿色 &bb 青色 &cc 红色 &dd 亮紫 &ee 黄色 &ff 白色"));
+        player.sendMessage(LegacyComponentSerializer.legacyAmpersand()
+                .deserialize("&f&ll 加粗 &r&f&mm 删除线&r &r&f&nn 下划线&r &r&f&oo 斜体 &r&f&fr 重置"));
+        player.sendMessage(
+                LegacyComponentSerializer.legacyAmpersand().deserialize("&7-----====== &l调色板 &7======-----"));
     }
 }

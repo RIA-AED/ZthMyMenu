@@ -1,6 +1,10 @@
 name: ZthMyMenu
-version: "1.0.1"
+version: "1.0.2"
 main: ink.magma.zthMyMenu.ZthMyMenu
 api-version: "1.21"
 authors: [Magma]
 softdepend: [Vault]
+permissions:
+  zth.mymenu.command.reload:
+    description: Grants access to reload command of ZthMyMenu.
+    default: op
